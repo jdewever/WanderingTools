@@ -3,15 +3,20 @@
   "id": "wanderingtools",
   "version": "${version}",
   "name": "WanderingTools",
-  "description": "",
-  "authors": [],
+  "description": "Provides some info and tools for wandering traders, such as a message when they (dis-)appear and their spawn chance & ticks.",
+  "authors": [
+    "jdewever <dev@jonasdewever.xyz>"
+  ],
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/wanderingtools/icon.png",
   "environment": "server",
   "entrypoints": {
     "main": [
-      "xyz.jonasdewever.wanderingtools.Main"
+      {
+        "value": "xyz.jonasdewever.wanderingtools.Main",
+        "adapter": "kotlin"
+      }
     ]
   },
   "mixins": [
