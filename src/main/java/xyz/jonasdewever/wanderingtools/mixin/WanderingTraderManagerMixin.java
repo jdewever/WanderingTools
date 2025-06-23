@@ -6,6 +6,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.math.BlockPos;
@@ -62,6 +64,10 @@ abstract class ServerWorldMixin {
               Items.PALE_OAK_SAPLING,
               Items.MANGROVE_PROPAGULE
       );
+      Set<Item> legendaryItems = Set.of(
+              Items.MOSS_BLOCK,
+              Items.POINTED_DRIPSTONE
+      );
       HashSet<Item> notableItems = new HashSet<>();
 
       for (TradeOffer offer : offers) {
@@ -75,7 +81,19 @@ abstract class ServerWorldMixin {
         message.append("\nThey are awaiting execution for their failure to present good trades.");
       } else {
         for (Item item : notableItems) {
-          message.append("\nBro has: ").append(item.getName().getString());
+          if (legendaryItems.contains(item)) {
+            message.append("\nLegendary Item: ").append(item.getName().getString());
+            world.playSound(
+                    null,
+                    position,
+                    SoundEvents.BLOCK_END_PORTAL_SPAWN,
+                    SoundCategory.MASTER,
+                    5.0f,
+                    1.0f
+            );
+          } else {
+            message.append("\nBro has: ").append(item.getName().getString());
+          }
         }
       }
 
