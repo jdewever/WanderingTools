@@ -34,38 +34,13 @@ abstract class ServerWorldMessageMixin {
       String wandyName = entity.getName().getString();
       if (wandyName.equals("Wandering Trader")) useName = false;
 
-      StringBuilder message = new StringBuilder("🧉 A Trader ");
-      if (useName) message.append(String.format("%s ", wandyName));
-      message.append(String.format("has wandered into this realm at approx. X: %d, Y: %d, Z: %d\n",
-              position.getX(), position.getY(), position.getZ()));
+      String name = useName ? "Trader " + wandyName : "A Trader";
+
+      StringBuilder message = new StringBuilder(String.format("🧉 %s has wandered into this realm at approx. X: %d, Y: %d, Z: %d\n", name, position.getX(), position.getY(), position.getZ()));
 
       List<TradeOffer> offers = wandy.getOffers();
-      Set<Item> itemsWeWant = Set.of(
-              Items.MOSS_BLOCK,
-              Items.PALE_MOSS_BLOCK,
-              Items.PACKED_ICE,
-              Items.BLUE_ICE,
-              Items.KELP,
-              Items.SLIME_BALL,
-              Items.POINTED_DRIPSTONE,
-              Items.SAND,
-              Items.RED_SAND,
-              Items.ROOTED_DIRT,
-              Items.PODZOL,
-              Items.ACACIA_SAPLING,
-              Items.BIRCH_SAPLING,
-              Items.CHERRY_SAPLING,
-              Items.SPRUCE_SAPLING,
-              Items.JUNGLE_SAPLING,
-              Items.DARK_OAK_SAPLING,
-              Items.OAK_SAPLING,
-              Items.PALE_OAK_SAPLING,
-              Items.MANGROVE_PROPAGULE
-      );
-      Set<Item> legendaryItems = Set.of(
-              Items.MOSS_BLOCK,
-              Items.POINTED_DRIPSTONE
-      );
+      Set<Item> itemsWeWant = Set.of(Items.MOSS_BLOCK, Items.PALE_MOSS_BLOCK, Items.PACKED_ICE, Items.BLUE_ICE, Items.KELP, Items.SLIME_BALL, Items.POINTED_DRIPSTONE, Items.SAND, Items.RED_SAND, Items.ROOTED_DIRT, Items.PODZOL, Items.ACACIA_SAPLING, Items.BIRCH_SAPLING, Items.CHERRY_SAPLING, Items.SPRUCE_SAPLING, Items.JUNGLE_SAPLING, Items.DARK_OAK_SAPLING, Items.OAK_SAPLING, Items.PALE_OAK_SAPLING, Items.MANGROVE_PROPAGULE);
+      Set<Item> legendaryItems = Set.of(Items.MOSS_BLOCK, Items.POINTED_DRIPSTONE);
       HashSet<Item> notableItems = new HashSet<>();
 
       for (TradeOffer offer : offers) {
@@ -81,24 +56,14 @@ abstract class ServerWorldMessageMixin {
         for (Item item : notableItems) {
           if (legendaryItems.contains(item)) {
             message.append("\nLegendary Item: ").append(item.getName().getString());
-            world.playSound(
-                    null,
-                    position,
-                    SoundEvents.BLOCK_END_PORTAL_SPAWN,
-                    SoundCategory.MASTER,
-                    5.0f,
-                    1.0f
-            );
+            world.playSound(null, position, SoundEvents.BLOCK_END_PORTAL_SPAWN, SoundCategory.MASTER, 5.0f, 1.0f);
           } else {
             message.append("\nBro has: ").append(item.getName().getString());
           }
         }
       }
 
-      world.getServer().getPlayerManager().broadcast(
-              Text.literal(message.toString()).formatted(Formatting.GOLD),
-              false
-      );
+      world.getServer().getPlayerManager().broadcast(Text.literal(message.toString()).formatted(Formatting.GOLD), false);
     }
   }
 }

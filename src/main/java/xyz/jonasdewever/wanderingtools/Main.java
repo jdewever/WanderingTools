@@ -32,7 +32,7 @@ public class Main implements ModInitializer {
       List<SpecialSpawner> spawners = ((ServerWorldAccessor) serverWorld.getServer().getWorld(World.OVERWORLD)).spawners();
       WanderingTraderManager wanderingManager = (WanderingTraderManager) spawners.get(4);
       WanderingTraderManagerAccess wanderingAccess = (WanderingTraderManagerAccess) wanderingManager;
-      
+
       int chance = wanderingAccess.spawnChance();
       int timer = wanderingAccess.spawnTimer();
       int delay = wanderingAccess.spawnDelay();
