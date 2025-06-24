@@ -10,13 +10,13 @@
   "contact": {},
   "license": "All-Rights-Reserved",
   "icon": "assets/wanderingtools/icon.png",
-  "environment": "server",
+  "environment": "*",
   "entrypoints": {
     "main": [
-      {
-        "value": "xyz.jonasdewever.wanderingtools.Main",
-        "adapter": "kotlin"
-      }
+      "xyz.jonasdewever.wanderingtools.Main"
+    ],
+    "client": [
+      "xyz.jonasdewever.wanderingtools.ClientMain"
     ]
   },
   "mixins": [
@@ -24,7 +24,6 @@
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",
-    "fabric-language-kotlin": ">=${kotlin_loader_version}",
     "fabric": "*",
     "minecraft": "${minecraft_version}"
   }

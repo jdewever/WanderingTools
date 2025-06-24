@@ -3,10 +3,14 @@
   "minVersion": "0.8",
   "package": "xyz.jonasdewever.wanderingtools.mixin",
   "compatibilityLevel": "JAVA_21",
-  "mixins": [
-    "ServerWorldMixin"
+  "mixins": [],
+  "server": [
+    "ServerWorldInfoMixin",
+    "ServerWorldMessageMixin",
+    "WanderingTraderManagerMixin"
   ],
   "client": [
+    "DebugHudMixin"
   ],
   "injectors": {
     "defaultRequire": 1
